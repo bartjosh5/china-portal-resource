@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>世界杯预选赛 · 信息卡介绍页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            min-height: 100vh;
+            background: linear-gradient(145deg, #fbe9d7 0%, #f7d9bc 40%, #edc9a6 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 1rem;
+            line-height: 1.6;
+            color: #2e241e;
+        }
+
+        .page-wrapper {
+            max-width: 1100px;
+            width: 100%;
+        }
+
+        /* 主视觉卡片（hero） */
+        .hero-card {
+            background: #ffffffec;
+            backdrop-filter: blur(2px);
+            border-radius: 36px 36px 28px 28px;
+            box-shadow: 0 16px 40px -12px rgba(110, 70, 40, 0.25);
+            padding: 2.8rem 2.4rem 2.4rem;
+            margin-bottom: 2.2rem;
+            text-align: center;
+            border: 1px solid rgba(255, 245, 235, 0.5);
+            transition: all 0.2s;
+        }
+
+        .hero-card h1 {
+            font-size: 2.4rem;
+            font-weight: 600;
+            letter-spacing: 0.02em;
+            color: #3d2b1c;
+            margin-bottom: 0.4rem;
+        }
+
+        .hero-card .subhead {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #7b5f48;
+            background: #f7ede4;
+            display: inline-block;
+            padding: 0.2rem 1.2rem;
+            border-radius: 40px;
+            margin-bottom: 1.6rem;
+        }
+
+        .hero-card p {
+            font-size: 1.05rem;
+            max-width: 720px;
+            margin: 0 auto 0.2rem;
+            color: #3f3228;
+        }
+
+        .hero-card .highlight-link-wrap {
+            margin-top: 1.8rem;
+        }
+
+        /* 用途卡片网格 */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.8rem;
+            margin-bottom: 2.4rem;
+        }
+
+        .card-item {
+            background: #fffffffa;
+            border-radius: 28px;
+            padding: 2rem 1.6rem 1.8rem;
+            box-shadow: 0 8px 20px -6px rgba(110, 70, 40, 0.18);
+            border: 1px solid #fff5eb;
+            transition: transform 0.15s ease, box-shadow 0.2s;
+        }
+
+        .card-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 16px 28px -10px rgba(100, 65, 35, 0.22);
+        }
+
+        .card-item .icon-symbol {
+            font-size: 2rem;
+            line-height: 1;
+            margin-bottom: 1rem;
+            display: block;
+            color: #b57a52;
+        }
+
+        .card-item h3 {
+            font-size: 1.35rem;
+            font-weight: 600;
+            color: #3d291b;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-item p {
+            font-size: 0.97rem;
+            color: #4f3c2c;
+            margin-bottom: 0.8rem;
+        }
+
+        .card-item .tag {
+            display: inline-block;
+            background: #ede0d4;
+            border-radius: 40px;
+            padding: 0.2rem 0.9rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #4d3625;
+            margin-top: 0.2rem;
+        }
+
+        /* 适合人群卡片 (采用不同样式，但仍是白色卡片) */
+        .audience-section {
+            background: #fffffffa;
+            border-radius: 32px;
+            padding: 2rem 2.2rem 2.2rem;
+            margin-bottom: 2.2rem;
+            box-shadow: 0 8px 24px -8px rgba(100, 65, 35, 0.15);
+            border: 1px solid #f7e8db;
+        }
+
+        .audience-section h2 {
+            font-size: 1.7rem;
+            font-weight: 500;
+            color: #3d2b1a;
+            margin-bottom: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .audience-flex {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.8rem 2.4rem;
+        }
+
+        .audience-item {
+            flex: 1 1 200px;
+            background: #f9f2ea;
+            border-radius: 24px;
+            padding: 1.2rem 1.4rem;
+            border-left: 5px solid #cc9f7a;
+        }
+
+        .audience-item strong {
+            display: block;
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+            color: #3e2b1b;
+        }
+
+        .audience-item span {
+            font-size: 0.95rem;
+            color: #4f3a28;
+        }
+
+        /* 自然链接段落 */
+        .link-paragraph {
+            background: #fffffffa;
+            border-radius: 28px;
+            padding: 2rem 2.4rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 6px 18px -6px rgba(80, 50, 30, 0.12);
+            border: 1px solid #fbefe4;
+            font-size: 1.02rem;
+        }
+
+        .link-paragraph p {
+            margin-bottom: 1rem;
+        }
+
+        .link-paragraph p:last-child {
+            margin-bottom: 0;
+        }
+
+        .link-paragraph a {
+            color: #9f6e4b;
+            text-decoration: none;
+            font-weight: 550;
+            border-bottom: 1.5px dotted #dbbca3;
+            transition: border-bottom 0.2s, color 0.2s;
+        }
+
+        .link-paragraph a:hover {
+            color: #6a442a;
+            border-bottom: 1.5px solid #6a442a;
+        }
+
+        /* FAQ 摘要 */
+        .faq-mini {
+            background: #fffffffa;
+            border-radius: 28px;
+            padding: 1.8rem 2.2rem;
+            border: 1px solid #efe0d2;
+            box-shadow: 0 4px 14px -4px rgba(80, 50, 30, 0.08);
+        }
+
+        .faq-mini h3 {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: #3b291c;
+            margin-bottom: 1.2rem;
+        }
+
+        .faq-item {
+            display: flex;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+            align-items: flex-start;
+        }
+
+        .faq-item .q-marker {
+            font-weight: 600;
+            color: #a47654;
+            min-width: 1.8rem;
+        }
+
+        .faq-item .a-text {
+            color: #3a2c20;
+        }
+
+        .faq-item .a-text strong {
+            font-weight: 600;
+            color: #5b3f2b;
+        }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 2.4rem;
+            font-size: 0.85rem;
+            color: #6b5543;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 560px) {
+            .hero-card {
+                padding: 2rem 1.2rem;
+            }
+            .hero-card h1 {
+                font-size: 1.9rem;
+            }
+            .card-grid {
+                gap: 1.2rem;
+            }
+            .audience-section {
+                padding: 1.6rem 1.2rem;
+            }
+            .link-paragraph {
+                padding: 1.6rem 1.2rem;
+            }
+            .faq-mini {
+                padding: 1.4rem 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="page-wrapper">
+    <!-- 主视觉 hero 卡片 -->
+    <div class="hero-card">
+        <h1>⚽ 预选赛信息站</h1>
+        <div class="subhead">世界杯预选赛 · 实时动态</div>
+        <p>从赛程追踪到球队情报，这里整理了一份面向国内球迷的稳定信息参照。页面内容围绕 <strong>世界杯预选赛</strong> 搭建，帮助你在冗杂资讯中快速定位核心内容。</p>
+        <div class="highlight-link-wrap">
+            <span style="background: #e6d3c1; border-radius: 40px; padding: 0.3rem 1.6rem 0.3rem 1.6rem; font-size: 0.95rem; display: inline-block;">
+                🔗 主要入口：<a href="https://china-portal-worldcup.com" style="color:#3d2b1c; text-decoration:none; font-weight:600;">世界杯预选赛</a>
+            </span>
+        </div>
+    </div>
+
+    <!-- 用途卡片（三个） -->
+    <div class="card-grid">
+        <div class="card-item">
+            <span class="icon-symbol">📋</span>
+            <h3>赛程与积分</h3>
+            <p>收录亚洲区及部分跨洲附加赛的赛程表、积分排名。按轮次更新，方便对照日期与对手。</p>
+            <span class="tag">实时</span>
+        </div>
+        <div class="card-item">
+            <span class="icon-symbol">📰</span>
+            <h3>资讯简报</h3>
+            <p>摘编与预选赛相关的阵容变化、主场信息及裁判安排，不做过度解读，只做信息转述。</p>
+            <span class="tag">简明</span>
+        </div>
+        <div class="card-item">
+            <span class="icon-symbol">🧭</span>
+            <h3>观看指引</h3>
+            <p>整理国内转播平台、开球时间对照表及中立场地说明，减少搜索成本，直达内容。</p>
+            <span class="tag">实用</span>
+        </div>
+    </div>
+
+    <!-- 适合人群卡片（采用不同布局） -->
+    <div class="audience-section">
+        <h2>🧑‍🤝‍🧑 适合这样的人群</h2>
+        <div class="audience-flex">
+            <div class="audience-item">
+                <strong>🏟️ 长期跟赛球迷</strong>
+                <span>希望集中查看预选赛日程、避免漏掉关键轮次，需要一个稳定的信息聚合参考。</span>
+            </div>
+            <div class="audience-item">
+                <strong>📱 碎片时间阅读者</strong>
+                <span>不想被推送淹没，只想了解预选赛的基本动态和赛果摘要，页面结构直接清晰。</span>
+            </div>
+            <div class="audience-item">
+                <strong>📊 数据型爱好者</strong>
+                <span>关注积分变化、小组形势和晋级规则，卡片式信息方便快速对照。</span>
+            </div>
+            <div class="audience-item">
+                <strong>🌏 多队关注者</strong>
+                <span>同时留意几支球队的预选赛进程，按赛区归纳的展示方式更易查阅。</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 自然链接段落 -->
+    <div class="link-paragraph">
+        <p>这个页面作为整理后的信息卡片页，所有内容都围绕 <strong>世界杯预选赛</strong> 展开。如果你需要直接进入主题站点浏览详细赛程、球队名单或官方公告，可以前往 <a href="https://china-portal-worldcup.com">世界杯预选赛</a> 查看。站内信息保持克制更新，不包含场外预测或主观评级。</p>
+        <p>另外，页面内所引用的赛程时间均以亚足联及国际足联官方发布为准，各平台转播安排可能临时调整，建议赛前再次确认。如果你在寻找历史预选赛数据或跨届比较，也可以通过同一入口找到归档内容。</p>
+    </div>
+
+    <!-- FAQ 摘要（不是完整FAQ，而是摘录式） -->
+    <div class="faq-mini">
+        <h3>❓ 常见问题摘要</h3>
+        <div class="faq-item">
+            <div class="q-marker">Q:</div>
+            <div class="a-text"><strong>预选赛赛程多久更新一次？</strong> 通常在官方公布后24小时内同步，重大调整时会额外标注。</div>
+        </div>
+        <div class="faq-item">
+            <div class="q-marker">Q:</div>
+            <div class="a-text"><strong>页面是否包含所有大洲预选赛？</strong> 以亚洲区为主，同时收录涉及跨洲附加赛的关键场次，其他大洲仅做结果摘要。</div>
+        </div>
+        <div class="faq-item">
+            <div class="q-marker">Q:</div>
+            <div class="a-text"><strong>链接跳转是否安全？</strong> 本站所有链接均指向   <a href="https://china-portal-worldcup.com" style="color:#9f6e4b; text-decoration: underline dotted;">世界杯预选赛</a>  及其子页面，无第三方广告外链。</div>
+        </div>
+    </div>
+
+    <div class="footer-note">
+        ⚡ 信息卡片 · 稳定入口 &nbsp;|&nbsp; 基于公开资料整理
+    </div>
+</div>
+</body>
+</html>
